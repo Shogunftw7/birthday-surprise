@@ -1,0 +1,215 @@
+\<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 🎉</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #2c5364);
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 60px;
+    font-size: 50px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.8);
+}
+
+.name {
+    font-size: 40px;
+    color: #00ffd5;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #00ffd5; }
+    to { text-shadow: 0 0 25px #00ffff; }
+}
+
+.msg {
+    margin: 15px auto;
+    width: 70%;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* 🎂 Cake */
+.cake {
+    position: relative;
+    margin-top: 40px;
+    font-size: 100px;
+    cursor: pointer;
+}
+
+.cake-emoji {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.6s;
+}
+
+.cut .left {
+    transform: translateX(-150px) rotate(-15deg);
+}
+
+.cut .right {
+    transform: translateX(150px) rotate(15deg);
+}
+
+.inside {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    font-size: 20px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.cut .inside {
+    opacity: 1;
+}
+
+/* 💐 Bouquets */
+.bouquet-left, .bouquet-right {
+    position: absolute;
+    bottom: 20px;
+    font-size: 80px;
+    animation: floatBouquet 3s infinite ease-in-out;
+}
+
+.bouquet-left {
+    left: 20px;
+}
+
+.bouquet-right {
+    right: 20px;
+}
+
+@keyframes floatBouquet {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* 🎊 Confetti */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+
+/* 🎈 Balloons */
+.balloon {
+    position: absolute;
+    bottom: -100px;
+    width: 60px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+    to { transform: translateY(-120vh); }
+}
+
+/* 💥 Pop */
+.pop {
+    position: absolute;
+    font-size: 20px;
+    animation: popFade 0.5s forwards;
+}
+
+@keyframes popFade {
+    to {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎂 Happy Birthday 🎂</h1>
+<div class="name">FIDHUUUUU 🎉</div>
+
+<div class="msg">
+Happy birthday to you 🎂✨. Hope you're having fun and a great day.<br>
+May Allah make this and the coming years better for you and make everything perfect as you planned.<br><br>
+Again and always, I want to thank you for everything.<br>
+Also, this is a small gift from my side for you — hope you will like it and it makes you happy 😊.<br><br>
+So once again… Happy Birthday to YOU &lt;3 :)
+</div>
+
+<!-- 🎂 Cake -->
+<div class="cake" onclick="cutCake(this)">
+    <div class="cake-emoji left">🎂</div>
+    <div class="cake-emoji right">🎂</div>
+    <div class="inside">🎉 Surprise! 🎉</div>
+</div>
+
+<!-- 💐 Bouquets -->
+<div class="bouquet-left">💐</div>
+<div class="bouquet-right">💐</div>
+
+<script>
+// 🎂 Cake cut
+function cutCake(el) {
+    el.classList.toggle("cut");
+}
+
+// 🎊 Confetti
+function createConfetti() {
+    const c = document.createElement("div");
+    c.classList.add("confetti");
+
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.backgroundColor = "hsl(" + Math.random()*360 + ",100%,50%)";
+    c.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 8000);
+}
+setInterval(createConfetti, 100);
+
+// 🎈 Balloons
+function createBalloon() {
+    const b = document.createElement("div");
+    b.classList.add("balloon");
+
+    b.style.left = Math.random() * window.innerWidth + "px";
+    b.style.backgroundColor = "hsl(" + Math.random()*360 + ",100%,60%)";
+    b.style.animationDuration = (5 + Math.random() * 4) + "s";
+
+    b.addEventListener("click", () => {
+        const pop = document.createElement("div");
+        pop.classList.add("pop");
+        pop.innerText = "💥";
+        pop.style.left = b.style.left;
+        pop.style.top = b.getBoundingClientRect().top + "px";
+
+        document.body.appendChild(pop);
+        setTimeout(() => pop.remove(), 500);
+
+        b.remove();
+    });
+
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(), 9000);
+}
+setInterval(createBalloon, 800);
+</script>
+
+</body>
+</html>
