@@ -1,7 +1,8 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday 🎉</title>
 
 <style>
@@ -12,6 +13,39 @@ body {
     overflow: hidden;
     color: white;
     text-align: center;
+}
+
+/* 🔒 Lock Screen */
+#lockScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 999;
+}
+
+input {
+    padding: 10px;
+    font-size: 18px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* 🎉 Main Content (hidden first) */
+#mainContent {
+    display: none;
 }
 
 h1 {
@@ -38,7 +72,6 @@ h1 {
     line-height: 1.6;
 }
 
-/* 🎂 Cake */
 .cake {
     position: relative;
     margin-top: 40px;
@@ -74,7 +107,6 @@ h1 {
     opacity: 1;
 }
 
-/* 💐 Bouquets */
 .bouquet-left, .bouquet-right {
     position: absolute;
     bottom: 20px;
@@ -82,20 +114,14 @@ h1 {
     animation: floatBouquet 3s infinite ease-in-out;
 }
 
-.bouquet-left {
-    left: 20px;
-}
-
-.bouquet-right {
-    right: 20px;
-}
+.bouquet-left { left: 20px; }
+.bouquet-right { right: 20px; }
 
 @keyframes floatBouquet {
     0%,100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
 }
 
-/* 🎊 Confetti */
 .confetti {
     position: absolute;
     width: 10px;
@@ -108,7 +134,6 @@ h1 {
     to { transform: translateY(110vh); }
 }
 
-/* 🎈 Balloons */
 .balloon {
     position: absolute;
     bottom: -100px;
@@ -123,7 +148,6 @@ h1 {
     to { transform: translateY(-120vh); }
 }
 
-/* 💥 Pop */
 .pop {
     position: absolute;
     font-size: 20px;
@@ -141,6 +165,16 @@ h1 {
 
 <body>
 
+<!-- 🔒 LOCK SCREEN -->
+<div id="lockScreen">
+    <h2>Enter Secret Password 🎂</h2>
+    <input type="password" id="password" placeholder="Enter here">
+    <button onclick="checkPassword()">Unlock 🎉</button>
+</div>
+
+<!-- 🎉 MAIN CONTENT -->
+<div id="mainContent">
+
 <h1>🎂 Happy Birthday 🎂</h1>
 <div class="name">FIDHUUUUU 🎉</div>
 
@@ -152,21 +186,40 @@ Also, this is a small gift from my side for you — hope you will like it and it
 So once again… Happy Birthday to YOU &lt;3 :)
 </div>
 
-<!-- 🎂 Cake -->
 <div class="cake" onclick="cutCake(this)">
     <div class="cake-emoji left">🎂</div>
     <div class="cake-emoji right">🎂</div>
     <div class="inside">🎉 Surprise! 🎉</div>
 </div>
 
-<!-- 💐 Bouquets -->
 <div class="bouquet-left">💐</div>
 <div class="bouquet-right">💐</div>
 
+</div>
+
 <script>
-// 🎂 Cake cut
+// 🔐 PASSWORD CHECK
+function checkPassword() {
+    let pass = document.getElementById("password").value;
+
+    if (pass === "1234") { // CHANGE PASSWORD HERE
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+
+        for (let i = 0; i < 100; i++) {
+            setTimeout(createConfetti, i * 20);
+        }
+    } else {
+        alert("Wrong password 😅");
+    }
+}
+
+// 🎂 Cake
 function cutCake(el) {
     el.classList.toggle("cut");
+    for (let i = 0; i < 50; i++) {
+        createConfetti();
+    }
 }
 
 // 🎊 Confetti
